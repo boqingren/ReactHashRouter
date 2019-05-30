@@ -20,7 +20,6 @@ const Li = props => {
 export default props => {
     const { children } = props;
     const count = (Array.isArray(children)? children: []).length;
-    // const count = children.length;
     const { actives, setActives } = useActive(count);
 
     return (

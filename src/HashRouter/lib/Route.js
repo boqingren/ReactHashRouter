@@ -7,6 +7,11 @@ export default props => {
     const { pathname } = hashState.location;                        // pathname is window.location.pathname
     const { path, component: Component, exact = false } = props;    // <Route path="/home" component={Home} />
     const regexp = pathToRegexp(path, [], { end: exact });          // 根据 <Route /> 传进来的的 path 生成一个正则表达式，"end: false" 表示模糊匹配，"end: true" 表示精确匹配
+    const componentProps = {
+        location: hashState.location,
+        history: hashState.history,
+        match: {}
+    };
     
-    return regexp.test(pathname)? <Component />: null;
+    return regexp.test(pathname)? <Component {...componentProps}/>: null;
 };
