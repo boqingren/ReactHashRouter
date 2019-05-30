@@ -27,7 +27,7 @@ export default props => {
             <div className="container-fluid">
                 <div className="navbar-heading">
                     <div className="navbar-brand">
-                        React Hash Router !
+                        React Router !
                     </div>
                 </div>
                 <ul className="nav navbar-nav">

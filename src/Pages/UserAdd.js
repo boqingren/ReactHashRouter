@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import ReduxContext from "../Store/ReduxContext";
+import { setUserList } from "../Store/action";
 
 const renderFormGroup = (flag, userInfo, setUserInfo) => {
     const handleChange = (event, flag) => {
@@ -26,23 +28,29 @@ const renderFormGroup = (flag, userInfo, setUserInfo) => {
 };
 
 export default props => {
+    const { state, dispatch } = useContext(ReduxContext);
     const [userInfo, setUserInfo] = useState({
         username: "",
         nickname: "",
         password: ""
     });
 
-    const handleSubmit = event => {
+    const handleSubmit = (event, { userList }) => {
         event.preventDefault();
-        console.log(`userInfo: ${JSON.stringify(userInfo)}`);
-        const hasEmpty = Object.values(userInfo).some(item => "" === item);
-        if(!hasEmpty) props.history.push("/user/list");
+        const len = (Array.isArray(userList)? userList: []).length;
+        if(Object.values(userInfo).every(item => "" !== item)) {
+            dispatch(setUserList({
+                id: len + 1,
+                ...userInfo
+            }));
+            props.history.push("/user/list");
+        };
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={event => handleSubmit(event, state)}>
             {Object.keys(userInfo).map((item => renderFormGroup(item, userInfo, setUserInfo)))}
-            <button type="submit" className="btn btn-default">Submit</button>
+            <button type="submit" className="btn btn-primary">Submit</button>
         </form>
     );
 };
