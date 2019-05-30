@@ -1,12 +1,15 @@
-import React, { Fragment, useContext } from "react";
+import React, { useContext } from "react";
 import HashContext from "./HashContext";
 
 export default props => {
-    const value = useContext(HashContext);
-    console.log(`useContext(HashContext): ${JSON.stringify(value)}`)
+    const contextValue = useContext(HashContext);
+    const { pathname } = contextValue.location;
+    console.log(`pathname: ${pathname}`);
+    const { path, component: Component } = props;
+    console.log(`pathname === path: ${pathname === path}`);
     return (
-        <Fragment>
-            {props.children}
-        </Fragment>
+        <div>
+            {pathname === path? <Component />: null}
+        </div>
     );
 };

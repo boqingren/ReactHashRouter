@@ -14,9 +14,11 @@ export default props => {
                 <a>User</a>
             </Navigation>
             <HashRouter>
-                <Route path="/home" component={Home} />
-                <Route path="/profile" component={Profile} />
-                <Route path="/user" component={User} />
+                <div>
+                    <Route path="/home" component={Home} />
+                    <Route path="/profile" component={Profile} />
+                    <Route path="/user" component={User} />
+                </div>
             </HashRouter>
         </div>
     );
