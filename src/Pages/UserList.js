@@ -9,10 +9,10 @@ export default props => {
         <div>
             {(Array.isArray(userList)? userList: []).map(item => (
                 <Fragment>
-                    <div>{`id: ${item.id}；`}</div>
-                    <div>{`username: ${item.username}；`}</div>
-                    <div>{`nickname: ${item.nickname}；`}</div>
-                    <div>{`password: ${item.password}；`}</div>
+                    <div>{`id: ${item.id};`}</div>
+                    <div>{`username: ${item.username};`}</div>
+                    <div>{`nickname: ${item.nickname};`}</div>
+                    <div>{`password: ${item.password}.`}</div>
                     <hr />
                 </Fragment>
             ))}
