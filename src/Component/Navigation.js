@@ -18,7 +18,9 @@ const Li = props => {
 };
 
 export default props => {
-    const count = props.children.length;
+    const { children } = props;
+    const count = (Array.isArray(children)? children: []).length;
+    // const count = children.length;
     const { actives, setActives } = useActive(count);
 
     return (
@@ -30,11 +32,11 @@ export default props => {
                     </div>
                 </div>
                 <ul className="nav navbar-nav">
-                    {props.children.map((item, index) => (
+                    {Array.isArray(children)? children.map((item, index) => (
                         <Li key={index} isActive={actives[index]} onClick={() => setActives(index)}>
                             {item}
                         </Li>
-                    ))}
+                    )): null}
                 </ul>
             </div>
         </div>
