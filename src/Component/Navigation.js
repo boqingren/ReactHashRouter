@@ -4,6 +4,7 @@ import useActive from "../Hooks/useActive";
 
 const Li = props => {
     const { isActive, ...restProps } = props;
+
     return (
         <li
             {...restProps}
@@ -19,6 +20,7 @@ const Li = props => {
 export default props => {
     const count = props.children.length;
     const { actives, setActives } = useActive(count);
+
     return (
         <div className="navbar navbar-inverse">
             <div className="container-fluid">
@@ -28,9 +30,9 @@ export default props => {
                     </div>
                 </div>
                 <ul className="nav navbar-nav">
-                    {props.children.map((child, idx) => (
-                        <Li key={idx} isActive={actives[idx]} onClick={() => setActives(idx)}>
-                            {child}
+                    {props.children.map((item, index) => (
+                        <Li key={index} isActive={actives[index]} onClick={() => setActives(index)}>
+                            {item}
                         </Li>
                     ))}
                 </ul>
