@@ -3,6 +3,7 @@ import { Route, Link, Switch } from "../HashRouter"
 import Sidebar from "../Layout/Sidebar";
 import UserAdd from "./UserAdd";
 import UserList from "./UserList";
+import UserDetails from "./UserDetails";
 
 export default props => {
     return (
@@ -14,10 +15,9 @@ export default props => {
                 </Sidebar>
             </div>
             <div className="col-md-10">
-                <Switch>
-                    <Route path="/user/add" exact={true} component={UserAdd} />
-                    <Route path="/user/list" component={UserList} />
-                </Switch>
+                <Route path="/user/add" exact={true} component={UserAdd} />
+                <Route path="/user/list" component={UserList} />
+                <Route path="/user/details/:id" component={UserDetails} />
             </div>
         </div>
     );

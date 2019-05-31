@@ -21,7 +21,7 @@ export default props => {
                         <Route path="/profile" component={Profile} />
                         <Route path="/user" component={User} />
                         <Route path="/404" component={NotFound} />
-                        <Redirect to="/404" />
+                        {/* <Redirect to="/404" /> */}
                     </Switch>
                 </div>
             </div>
