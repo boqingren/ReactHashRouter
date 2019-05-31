@@ -7,7 +7,6 @@ import User from "./Pages/User";
 import NotFound from "./Pages/NotFound";
 
 export default props => {
-
     return (
         <HashRouter>
             <div>
