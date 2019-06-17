@@ -1,17 +1,54 @@
-const handleError = (errType, Exception) => {
-    switch (errType) {
-        case Exception.httpError.val:               // http 异常
-            Exception.httpError.handle(Exception);
-            break;
+export default class Exception {
 
-        case Exception.envError.val:                // 环境变量异常
-            Exception.envError.handle(Exception);
-            break;
+    static runInTryCatch = runTask => {
+        try {
+            runTask();
+        } catch (error) {
+            debugger;
+            if (error && typeof error.type === "number") {
+                Exception.handleError(error.type);
+            }
+        }
+    }
 
-        default:                                    // 未知异常
-            Exception.defaultError.handle(Exception);
-            break;
-    };
-};
+    static handleError = errType => {
+        switch (errType) {
+            case Exception.httpError.val:
+                Exception.httpError.handle(Exception);
+                break;
+    
+            case Exception.envError.val:
+                Exception.envError.handle(Exception);
+                break;
+    
+            default:
+                Exception.defaultError.handle(Exception);
+                break;
+        };
+    }
 
-export default handleError;
+    static defaultError = {
+        val: 0,
+        name: "defaultError",
+        handle: error => {
+            console.log("defaultError", error);
+        }
+    }
+
+    static httpError = {
+        val: 1,
+        name: "httpError",
+        handle: error => {
+            console.log("httpError", error);
+        }
+    }
+
+    static envError = {
+        val: 2,
+        name: "envError",
+        handle: error => {
+            debugger;
+            console.log("envError", error);
+        }
+    }
+}
