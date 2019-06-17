@@ -1,4 +1,4 @@
-import Ast from "../utils/Assert";
+import Ast from "../Assert";
 
 export default class Exception {
 
@@ -14,11 +14,10 @@ export default class Exception {
 
 	static runInTryCatch = runTask => {
 		try {
-			runTask();
+			if (Ast.isFunction(runTask)) runTask();
 		} catch (error) {
-			if (error && typeof error.type === "number") {
-				Exception.handleError(error);
-			}
+			debugger;
+			if (error && Ast.isNumber(error.type)) Exception.handleError(error);
 		}
 	}
 
@@ -59,6 +58,7 @@ export default class Exception {
 		name: "Exception.envError",
 		handle: error => {
 			console.log("Exception.envError: ", error);
+			alert(("Exception.envError: ", error));
 		}
 	}
 }

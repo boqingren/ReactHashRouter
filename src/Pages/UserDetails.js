@@ -11,14 +11,23 @@ export default props => {
 
     const handleClick = event => {
         Exception.runInTryCatch(() => {
-            throw new Exception({
-                type: Exception.envError.val,
-                name: Exception.envError.name,
-                desc: "测试能不能捕获异常！",
-                data: { a: 1, b: 2 },
-                callback: data => {
-                    console.log(data);
-                }
+            new Promise((resolve, reject) => {
+                throw new Exception({
+                    name: "测试",
+                });
+                // const num = 100;
+                // const len = num.length();
+            }).catch(error => {
+                console.log("error instanceof TypeError: ", error instanceof TypeError);
+                throw new Exception({
+                    type: Exception.envError.val,
+                    name: error.name || Exception.envError.name,
+                    desc: error.message || "测试能不能捕获异常！",
+                    data: { a: 1, b: 2 },
+                    callback: data => {
+                        console.log(data);
+                    }
+                });
             });
         });
     };
